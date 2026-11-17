@@ -1,6 +1,7 @@
 <?php
 class Producto 
 {
+    private $id;
     private $nombre = "";
     private $categoria = "";
     private $precio = 0;
@@ -9,6 +10,7 @@ class Producto
 
     public function __construct($nombre, $categoria, $precio, $stock) 
     {
+        $this->id = uniqid();
         $this->nombre = $nombre;
         $this->categoria = $categoria;
         $this->precio = $precio;

@@ -17,11 +17,11 @@
             ["id" => 5, "nombre" => "Cafetera Express", "precio" => 79.95, "stock" => 12, "categoria" => "Electrodomésticos"] 
         ];
 
-        $totalPrecioStock = 0;
+        $total = 0;
         $categorias = [];
 
         foreach ($datosDeEntrada as $productoData) {
-            $totalPrecioStock += $productoData["precio"] * $productoData["stock"];
+            $total += $productoData["precio"] * $productoData["stock"];
             if (!in_array($productoData["categoria"], $categorias)) {
                 $categorias[] = $productoData["categoria"];
             }
@@ -31,7 +31,7 @@
 
     <div>
         <h2>Total Stock</h2>
-        <p><?php echo number_format($totalPrecioStock, 2, ',', '.'); ?>€</p>
+        <p><?php echo $total; ?>€</p>
     </div>
 
     <div>
@@ -44,7 +44,7 @@
         <?php 
             $buscado = Producto::getProdById(2, $datosDeEntrada);
             if ($buscado) {
-                echo "<p>Encontrado: " . $buscado->__toString() . "</p>";
+                echo "<p>ENCONTRADO : " . $buscado->__toString() . "</p>";
             } else {
                 echo "<p>Producto no encontrado.</p>";
             }
