@@ -1,40 +1,40 @@
 <?php
-session_start();
+    session_start();
 
-$error = false;
+    $error = false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario_ingresado = trim($_POST['usuario'] ?? '');
-    $password_ingresada = trim($_POST['password'] ?? '');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $usuario_ingresado = trim($_POST['usuario'] ?? '');
+        $password_ingresada = trim($_POST['password'] ?? '');
 
-    $encontrado = false;
+        $encontrado = false;
 
-    if (file_exists('usuarios.txt')) {
-        $lineas = file('usuarios.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        
-        foreach ($lineas as $linea) {
-            $partes = explode(':', $linea);
+        if (file_exists('usuarios.txt')) {
+            $lineas = file('usuarios.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             
-            if (count($partes) === 2) {
-                $usuario_archivo = trim($partes[0]);
-                $password_archivo = trim($partes[1]);
+            foreach ($lineas as $linea) {
+                $partes = explode(':', $linea);
+                
+                if (count($partes) === 2) {
+                    $usuario_archivo = trim($partes[0]);
+                    $password_archivo = trim($partes[1]);
 
-                if ($usuario_ingresado === $usuario_archivo && $password_ingresada === $password_archivo) {
-                    $encontrado = true;
-                    break;
+                    if ($usuario_ingresado === $usuario_archivo && $password_ingresada === $password_archivo) {
+                        $encontrado = true;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    if ($encontrado) {
-        $_SESSION['loginusu'] = $usuario_ingresado;
-        header("Location: index.php");
-        exit();
-    } else {
-        $error = true;
+        if ($encontrado) {
+            $_SESSION['loginusu'] = $usuario_ingresado;
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = true;
+        }
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
